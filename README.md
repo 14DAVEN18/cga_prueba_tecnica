@@ -1,7 +1,7 @@
 # cga_prueba_tecnica
 Proyecto sugerido para prueba técnica de la empresa CGA tecnologies para optar al puesto de Desarrollador Front-end
 
-# Pasos eejcutados
+# Pasos ejcutados
 
 ## 1. Creación del repositorio
 
@@ -18,3 +18,15 @@ Se clonó el [repositorio](https://github.com/14DAVEN18/cga_prueba_tecnica) prev
 Se instaló la librería de estilos [Angular Material](https://material.angular.io/) por medio del siguiente comando:
 
 > ng add @angular/material
+
+## 4. Estructura del proyecto
+
+Se creó una carpeta "Components" para almacenar cada una de los diferentes componentes de la aplicación. Por ejemplo, el mapan, el menú de la parte superior y demás páginas desplegadas por medio de las demás opciones.
+
+## 5. Creación de rutas para el Angular Router
+
+En el archivo app.routes.ts se crean las rutas correspondientes a cada componente.
+
+## 6. Insertar el snippet para Google Maps
+
+Se insertó un iframe para mostrar un mapa de Google por medio del API de Google Maps
