@@ -29,4 +29,10 @@ En el archivo app.routes.ts se crean las rutas correspondientes a cada component
 
 ## 6. Insertar el snippet para Google Maps
 
-Se insertó un iframe para mostrar un mapa de Google por medio del API de Google Maps
+Se insertó un script para mostrar un mapa de Google por medio del API de Google Maps
+Se agregaron las coordenadas al mapa con los iconos de los pines asiganos acorde al vehiculo del vendedor
+Se agrego un modal que es mostrado haciendo click en cualquier pin ubicado en el mapa.
+
+## 7. Lista de vendedores
+
+Se consumió el API de vendedores para traer los vendedores y mostrarlos en una lista

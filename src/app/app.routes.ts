@@ -3,6 +3,6 @@ import { MapComponent } from './components/map/map.component';
 import { TestComponent } from './components/test/test.component';
 
 export const routes: Routes = [
-    { 'path': 'map', 'component': MapComponent },
-    { 'path': 'test', 'component': TestComponent}
+    { 'path': 'map', 'title': 'Map', 'component': MapComponent },
+    { 'path': 'test', 'title': 'Test', 'component': TestComponent}
 ];

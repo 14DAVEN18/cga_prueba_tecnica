@@ -1,0 +1,10 @@
+.seller-info {
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    width: 200px;
+}
+
+.seller-info img {
+    height: 100%;
+}

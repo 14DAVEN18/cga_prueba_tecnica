@@ -1,0 +1,60 @@
+.card {
+    background-color: rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(200, 200, 200);
+    display: flex;
+    flex-direction: row;
+    height: 120px;
+    margin-bottom: 5px;
+    max-height: 120px;
+    width: 100%;
+    border-radius: 5px;
+    text-align: start;
+}
+
+.card:hover {
+    background-color: rgb(255, 255, 255);
+}
+
+.left-side, .right-side {
+    width: 50%;
+}
+
+.right-side {
+    align-items: flex-end;
+    display: flex;
+}
+
+.card p {
+    margin: 0 0 0 5px;
+}
+
+.name {
+    text-transform: uppercase;
+}
+
+.role, .location {
+    color: rgb(41, 126, 217);
+    font-size: 0.9em;
+}
+
+.location {
+    line-height: 1em;
+    margin-top: auto;
+}
+
+.address, .vehicle {
+    display: block;
+    width: 100%;
+}
+
+.photo {
+    box-shadow: 0px 0px 5px 5px rgb(0, 0, 0, .1);
+    border-radius: 5px;
+    height: 95%;
+    margin-left: auto;
+}
+
+.icon {
+    height: 40px;
+    margin-left: auto;
+}
