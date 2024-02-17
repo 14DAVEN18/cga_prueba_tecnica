@@ -4,8 +4,11 @@
             <img [src]="'/assets/img_prueba/' + data.photo + '.jpg'">
         </div>
         <div class="right-side">
-            <p>{{data.name}}</p>
-            <p>{{data.category}}</p>
+            <p class="name">{{data.name}}</p>
+            <p class="category">{{data.category}}</p>
         </div>
     </div>
 </mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary">VER</button>
+</mat-dialog-actions>

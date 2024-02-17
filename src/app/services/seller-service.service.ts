@@ -8,7 +8,8 @@ import { catchError, map, Observable, tap } from 'rxjs';
 })
 export class SellerServiceService {
 
-  private sellerUrl = 'http://74.235.109.154/api/salesman'
+  private getSellerUrl = 'http://74.235.109.154/api/salesman'
+  private createSellerUrl = 'http://74.235.109.154/api/salesman'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,6 +18,10 @@ export class SellerServiceService {
   constructor(private http: HttpClient) { }
 
   getSellers(): Observable<Seller[]> {
-    return this.http.get<Seller[]>(this.sellerUrl)
+    return this.http.get<Seller[]>(this.getSellerUrl)
+  }
+
+  createSeller(seller: Seller): Observable<Seller> {
+    return this.http.post<Seller>(this.createSellerUrl, seller, this.httpOptions)
   }
 }

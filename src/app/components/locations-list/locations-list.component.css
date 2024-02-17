@@ -58,3 +58,26 @@
     height: 40px;
     margin-left: auto;
 }
+
+/* Styles for the creation form */
+.seller-creation-form {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+}
+
+
+/* scrollbar styles */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}

@@ -5,10 +5,15 @@ import { SellerServiceService } from '../../services/seller-service.service';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
+  MatDialogActions,
   MatDialogTitle,
   MatDialogContent,
 } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+
+/* Import Interfaces */
 import { Seller } from '../../models/seller';
+
 
 declare const google: any;
 
@@ -90,7 +95,7 @@ export class MapComponent implements OnInit {
   selector: 'seller-modal',
   templateUrl: 'seller-modal.html',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogContent],
+  imports: [MatButtonModule, MatDialogActions, MatDialogContent, MatDialogTitle],
   styleUrl: './map.component.css'
 })
 export class SellerModal {
