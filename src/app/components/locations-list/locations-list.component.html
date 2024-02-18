@@ -1,19 +1,23 @@
 <h2>LISTADO DE LOCALIZACIONES</h2>
 <a>listado de dispositivos que reportan su posición</a>
-<div class="card" *ngFor="let seller of sellers">
-    <div class="left-side">
-        <p class="name">{{seller.name}}</p>
-        <p class="role">{{seller.category}}</p>
-        <p class="location" *ngIf="seller.coordinates" [innerHTML]="formatCoordinates(seller.coordinates)"></p>
-    </div>
-    <div class="right-side">
-        <div>
-            <p class="address">{{seller.address}}</p>
-            <p [ngStyle]="{'color': seller.isActive? 'green' : 'red'}" [innerHTML]="setActive(seller.isActive)"></p>
-            <p class="vehicle">tipo de vehiculo</p>
-            <img [src]="'/assets/img_prueba/' + seller.vehicle + '.svg'" class="icon">
+<div class="results">
+    <div class="card" *ngFor="let seller of sellers">
+        <div class="left-side">
+            <p class="name">{{seller.name}}</p>
+            <p class="role">{{seller.category}}</p>
+            <p class="location" *ngIf="seller.coordinates" [innerHTML]="formatCoordinates(seller.coordinates)"></p>
         </div>
-        <img [src]="'/assets/img_prueba/' + seller.photo + '.jpg'" class="photo">
+        <div class="right-side">
+            <div>
+                <p class="address">{{seller.address}}</p>
+                <p [ngStyle]="{'color': seller.isActive? 'green' : 'red'}" [innerHTML]="setActive(seller.isActive)"></p>
+                <p class="vehicle">tipo de vehiculo</p>
+                <img [src]="'/assets/img_prueba/' + seller.vehicle + '.svg'" class="icon">
+            </div>
+            <img [src]="'/assets/img_prueba/' + seller.photo + '.jpg'" class="photo">
+        </div>
     </div>
 </div>
-<button mat-raised-button color="primary" (click)="openDialog()">CREAR NUEVO</button>
+<div class="controls">
+    <button mat-raised-button color="primary" (click)="openDialog()">CREAR NUEVO</button>
+</div>

@@ -1,3 +1,15 @@
+.results {
+    height: 85%;
+    overflow-y: auto;
+}
+
+.controls {
+    align-items: center;
+    display: flex;
+    height: 8%;
+    justify-content: center;
+}
+
 .card {
     background-color: rgb(238, 238, 238);
     border-bottom: 1px solid rgb(200, 200, 200);

@@ -21,7 +21,15 @@ export class SellerServiceService {
     return this.http.get<Seller[]>(this.getSellerUrl)
   }
 
-  createSeller(seller: Seller): Observable<Seller> {
+  createSeller(
+    seller: {
+      id: string,
+      name: string,
+      category: string,
+      address: string,
+      photo: string,
+      vehicle: string
+    }): Observable<any> {
     return this.http.post<Seller>(this.createSellerUrl, seller, this.httpOptions)
   }
 }

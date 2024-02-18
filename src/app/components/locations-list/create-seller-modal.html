@@ -1,55 +1,63 @@
 <h2 mat-dialog-title>Crear vendedor</h2>
 <mat-dialog-content>
     <div class="seller-creation-form">
-        <mat-form-field>
-            <mat-label>id</mat-label>
-            <input matInput [formControl]="name">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Nombre</mat-label>
-            <input matInput [formControl]="name">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Categoría</mat-label>
-            <input matInput [formControl]="name">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Dirección</mat-label>
-            <input matInput [formControl]="name">
-        </mat-form-field>
-        <div>
+        <form [formGroup]="sellerForm" (ngSubmit)="createSeller()">
+            <div>
+                <mat-form-field>
+                    <mat-label>id</mat-label>
+                    <input matInput formControlName="id">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Categoría</mat-label>
+                    <input matInput formControlName="category">
+                </mat-form-field>
+            </div>
             <mat-form-field>
-                <mat-select required>
-                    <mat-option value="person1">Persona 1</mat-option>
-                    <mat-option value="person2">Persona 2</mat-option>
-                    <mat-option value="person3">Persona 3</mat-option>
-                    <mat-option value="person4">Persona 4</mat-option>
-                    <mat-option value="person5">Persona 5</mat-option>
-                    <mat-option value="person6">Persona 6</mat-option>
-                </mat-select>
-                <mat-label> Seleccione una foto </mat-label>
+                <mat-label>Dirección</mat-label>
+                <input matInput formControlName="address">
             </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field>
-                <mat-select required>
-                    <mat-option value="ambulancia">Ambulancia</mat-option>
-                    <mat-option value="carro">Carro</mat-option>
-                    <mat-option value="grua">Grua</mat-option>
-                    <mat-option value="moto">Moto</mat-option>
-                    <mat-option value="pin1">Pin 1</mat-option>
-                    <mat-option value="pin2">Dron</mat-option>
-                    <mat-option value="pin3">Pin 3</mat-option>
-                    <mat-option value="pin4">Pin 4</mat-option>
-                    <mat-option value="pin10">Camión</mat-option>
-                    <mat-option value="sinvehículo">Sin Vehículo</mat-option>
-                </mat-select>
-                <mat-label> Seleccione un vehículo </mat-label>
-            </mat-form-field>
-        </div>
+            <div>
+                <mat-form-field>
+                    <mat-select formControlName="photo">
+                        <mat-option value="person1">Persona 1</mat-option>
+                        <mat-option value="person2">Persona 2</mat-option>
+                        <mat-option value="person3">Persona 3</mat-option>
+                        <mat-option value="person4">Persona 4</mat-option>
+                        <mat-option value="person5">Persona 5</mat-option>
+                        <mat-option value="person6">Persona 6</mat-option>
+                    </mat-select>
+                    <mat-label> Seleccione una foto </mat-label>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-select formControlName="vehicle">
+                        <mat-option value="ambulancia">Ambulancia</mat-option>
+                        <mat-option value="carro">Carro</mat-option>
+                        <mat-option value="grua">Grua</mat-option>
+                        <mat-option value="moto">Moto</mat-option>
+                        <mat-option value="pin1">Pin 1</mat-option>
+                        <mat-option value="pin2">Dron</mat-option>
+                        <mat-option value="pin3">Pin 3</mat-option>
+                        <mat-option value="pin4">Pin 4</mat-option>
+                        <mat-option value="pin10">Camión</mat-option>
+                        <mat-option value="sinvehículo">Sin Vehículo</mat-option>
+                    </mat-select>
+                    <mat-label> Seleccione un vehículo </mat-label>
+                </mat-form-field>
+            </div>
+        </form>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-raised-button color="basic" mat-dialog-close>CANCELAR</button>
-    <button mat-raised-button color="primary">CREAR VENDEDOR</button>
+    <button mat-raised-button color="primary" (click)="createSeller()" [disabled]="!sellerForm.valid">CREAR VENDEDOR</button>
 </mat-dialog-actions>

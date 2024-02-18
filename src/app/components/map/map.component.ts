@@ -1,13 +1,14 @@
-import { Component, Inject,   OnInit } from '@angular/core';
+import { Component, Inject,   OnDestroy,   OnInit } from '@angular/core';
 import { SellerServiceService } from '../../services/seller-service.service';
 
 /* Imports from Angular Material */
 import {
   MatDialog,
-  MAT_DIALOG_DATA,
   MatDialogActions,
+  MatDialogClose,
   MatDialogTitle,
   MatDialogContent,
+  MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -24,7 +25,7 @@ declare const google: any;
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
   coordinates: {lat: number, lng: number, vehicle: string, id: string}[] = []
   sellers: Seller[] = []
 
@@ -32,7 +33,9 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.loadSellers()
-    this.initMap();
+  }
+
+  ngOnDestroy() {
   }
 
   loadSellers() {
@@ -48,43 +51,83 @@ export class MapComponent implements OnInit {
               id: seller.id
             })
           })
-          console.log('Coordinates: ', this.coordinates)
+          this.initMap();
         },
         error: (e) => console.log('Error: ', e),
         complete: () => console.info('Complete')
       })
   }
 
+  private getCenter(): {lat: number, lng: number} {
+    var shortestLatitude = 0;
+    var longestLatitude = 0;
+    var shortestLongitude = 0;
+    var longestLongitude = 0;
 
-  private initMap() {
-    const map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: 4.6497035, lng: -74.1751445 },
-      zoom: 13
-    })
+    var initial = false;
 
     this.coordinates.forEach(coordinate => {
-      const icon = {
-        url: '/assets/img_prueba/' + coordinate.vehicle + '.svg',
-        scaledSize: new google.maps.Size(40, 40),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(20, 40)
+      if (!initial) {
+        shortestLatitude = coordinate.lat
+        longestLatitude = coordinate.lat
+        shortestLongitude = coordinate.lng
+        longestLongitude = coordinate.lng
+        initial = true
+      } else {
+        if(coordinate.lat < shortestLatitude)
+          shortestLatitude = coordinate.lat
+        else if (coordinate.lat > longestLatitude)
+          longestLatitude = coordinate.lat
+      
+
+        if(coordinate.lng < shortestLongitude)
+          shortestLongitude = coordinate.lng
+        else if (coordinate.lng > longestLongitude)
+          longestLongitude = coordinate.lng
       }
+    })
 
-      const marker = new google.maps.Marker({
-        position: coordinate,
-        map: map,
-        icon: icon
-      });
+    var midLatitude = (shortestLatitude + longestLatitude)/2
+    var midLongitude = (shortestLongitude + longestLongitude)/2
 
-      marker.addListener("click", () => {
-        this.openDialog(coordinate.id)
+    return {lat: midLatitude, lng: midLongitude}
+  }
+
+
+  private initMap() {
+    const center = this.getCenter()
+    
+    if (typeof google !== undefined && google.maps) {
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center: center,
+        zoom: 12
       })
-    });
+  
+      this.coordinates.forEach(coordinate => {
+        const icon = {
+          url: '/assets/img_prueba/' + coordinate.vehicle + '.svg',
+          scaledSize: new google.maps.Size(40, 40),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(20, 40)
+        }
+  
+        const marker = new google.maps.Marker({
+          position: coordinate,
+          map: map,
+          icon: icon
+        });
+  
+        marker.addListener("click", () => {
+          this.openDialog(coordinate.id)
+        })
+      });
+    } else {
+      console.log('Google Maps API is not loaded yet');
+    }
   }
 
   openDialog(id: string) {
     const seller = this.sellers.find(seller => seller.id === id)
-    console.log("Selected seller: " , seller)
     this.dialog.open(SellerModal, {
       data: seller
     });
@@ -95,7 +138,7 @@ export class MapComponent implements OnInit {
   selector: 'seller-modal',
   templateUrl: 'seller-modal.html',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogContent, MatDialogTitle],
+  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle],
   styleUrl: './map.component.css'
 })
 export class SellerModal {
