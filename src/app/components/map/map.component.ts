@@ -28,14 +28,19 @@ declare const google: any;
 export class MapComponent implements OnInit, OnDestroy {
   coordinates: {lat: number, lng: number, vehicle: string, id: string}[] = []
   sellers: Seller[] = []
+  private intervalId: any;
 
   constructor(private sellerService: SellerServiceService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.loadSellers()
+    this.intervalId = setInterval(() => {
+      this.loadSellers();
+    }, 120000);
   }
 
   ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 
   loadSellers() {
@@ -53,8 +58,7 @@ export class MapComponent implements OnInit, OnDestroy {
           })
           this.initMap();
         },
-        error: (e) => console.log('Error: ', e),
-        complete: () => console.info('Complete')
+        error: (e) => console.log('Error: ', e)
       })
   }
 
