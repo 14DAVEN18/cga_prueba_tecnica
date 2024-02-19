@@ -36,6 +36,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.loadSellers()
     this.intervalId = setInterval(() => {
       this.loadSellers();
+      this.coordinates = []
     }, 120000);
   }
 
